@@ -41,24 +41,18 @@ class SudokuSolver:
                             self.solve()
                             self.grid[y][x] = 0
                     return
-        self.correctSolves.append(self.grid)
-
-    def printRandom(self):
-        print(np.matrix(random.choice(self.correctSolves)))
-
-    def printAll(self):
-        for el in self.correctSolves:
-            print(np.matrix(el))
+        print(np.matrix(self.grid))
+        self.correctSolves += 1
 
     def __init__(self, inGrid):
         if len(inGrid) == 0:
             raise ValueError("Empty in grid.")
         self.grid = inGrid
-        self.correctSolves = list()
+        self.correctSolves = 0
         start_time = time.time()
         self.solve()
         solve_time = round((time.time() - start_time), 6)
-        print("Found", len(self.correctSolves), "different solutions in", solve_time, "seconds.")
+        print("Found", self.correctSolves, "different solutions in", solve_time, "seconds.")
 
 
 # ====================================
@@ -76,4 +70,3 @@ if __name__ == "__main__":
             [0, 2, 0, 0, 9, 0, 0, 0, 1],
             [8, 0, 0, 0, 0, 0, 0, 0, 0]]
     solver = SudokuSolver(grid)
-    solver.printRandom()
